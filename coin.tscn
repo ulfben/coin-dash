@@ -49,7 +49,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("11_sbvkd")
 }],
-"loop": true,
+"loop": false,
 "name": &"sparkle",
 "speed": 12.0
 }]
@@ -64,6 +64,12 @@ script = ExtResource("1_cll5m")
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_rq5ro")
 animation = &"sparkle"
+frame = 10
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5g4dt")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
