@@ -1,6 +1,10 @@
 extends CanvasLayer
 signal start_game
 
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("ui_accept"):
+		_on_start_button_pressed()
+
 func update_score(value):
 	$MarginContainer/Score.text = str(value)
 	
