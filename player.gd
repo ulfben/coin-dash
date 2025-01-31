@@ -33,13 +33,14 @@ func _process(delta: float) -> void:
 		$AnimatedSprite2D.animation = "idle"
 	if velocity.x != 0:
 		$AnimatedSprite2D.flip_h = velocity.x < 0
-	
-
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("coins"):
 		area.pickup()
-		pickup.emit()
+		pickup.emit("coin")
 	if area.is_in_group("obstacles"):
 		hurt.emit()
 		die()
+	if area.is_in_group("powerups"):
+		area.pickup()
+		pickup.emit("powerup")

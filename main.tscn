@@ -1,18 +1,21 @@
-[gd_scene load_steps=10 format=3 uid="uid://08c2d1af3g16"]
+[gd_scene load_steps=12 format=3 uid="uid://08c2d1af3g16"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_wwr0o"]
 [ext_resource type="PackedScene" uid="uid://bggoylvmy208p" path="res://coin.tscn" id="2_abd01"]
 [ext_resource type="Texture2D" uid="uid://6ixshqtk2ep1" path="res://assets/grass.png" id="2_joeph"]
+[ext_resource type="PackedScene" uid="uid://cpneg367qheru" path="res://powerup.tscn" id="3_285xw"]
 [ext_resource type="PackedScene" uid="uid://u4pslnh0hweq" path="res://player.tscn" id="3_q1up0"]
 [ext_resource type="PackedScene" uid="uid://dn6fdt4leq6su" path="res://hud.tscn" id="5_5uq7s"]
 [ext_resource type="AudioStream" uid="uid://d1k1a8gjpxu86" path="res://assets/audio/EndSound.wav" id="6_xaat0"]
 [ext_resource type="AudioStream" uid="uid://bargk63phvyaf" path="res://assets/audio/Level.wav" id="7_yucic"]
 [ext_resource type="AudioStream" uid="uid://bjmrrk77pt0qq" path="res://assets/audio/Coin.wav" id="8_0pxan"]
 [ext_resource type="PackedScene" uid="uid://dw3quafjkx1rw" path="res://cactus.tscn" id="9_d2are"]
+[ext_resource type="AudioStream" uid="uid://xmvubqhoeqx8" path="res://assets/audio/Powerup.wav" id="11_4jxvb"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_wwr0o")
 coin_scene = ExtResource("2_abd01")
+powerup_scene = ExtResource("3_285xw")
 
 [node name="Background" type="TextureRect" parent="."]
 anchors_preset = 15
@@ -61,7 +64,14 @@ position = Vector2(240, 360)
 rotation = -3.14159
 current = true
 
+[node name="PowerupTimer" type="Timer" parent="."]
+
+[node name="PowerupSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_4jxvb")
+volume_db = -12.0
+
 [connection signal="hurt" from="Player" to="." method="_on_player_hurt"]
 [connection signal="pickup" from="Player" to="." method="_on_player_pickup"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
 [connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]
+[connection signal="timeout" from="PowerupTimer" to="." method="_on_powerup_timer_timeout"]
