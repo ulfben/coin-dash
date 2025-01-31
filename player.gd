@@ -40,6 +40,6 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("coins"):
 		area.pickup()
 		pickup.emit()
-	if area.is_in_group("osbstalces"):
+	if area.is_in_group("obstacles"):
 		hurt.emit()
 		die()
