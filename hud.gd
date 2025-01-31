@@ -1,7 +1,10 @@
 extends CanvasLayer
 signal start_game
+var playing = false
 
 func _process(delta: float) -> void:
+	if playing: 
+		return
 	if Input.is_action_just_pressed("ui_accept"):
 		_on_start_button_pressed()
 
@@ -22,6 +25,7 @@ func show_game_over():
 	$StartButton.show()
 	$message.text = "Coin Dash!"
 	$message.show()
+	playing = false
 
 func _on_timer_timeout() -> void:
 	$message.hide()
@@ -30,3 +34,4 @@ func _on_start_button_pressed() -> void:
 	$StartButton.hide()
 	$message.hide()
 	start_game.emit()
+	playing = true

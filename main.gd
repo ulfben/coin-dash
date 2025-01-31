@@ -27,6 +27,7 @@ func new_game():
 	spawn_coins()
 
 func spawn_coins():
+	$LevelSound.play()
 	for i in level + 4:
 		var c = coin_scene.instantiate()
 		add_child(c)
@@ -34,6 +35,7 @@ func spawn_coins():
 		c.position = Vector2(randi_range(0, screensize.x), randi_range(0, screensize.y))
 
 func game_over():
+	$EndSound.play()
 	playing = false
 	$GameTimer.stop()
 	get_tree().call_group("coins", "queue_free")
@@ -56,6 +58,10 @@ func _on_game_timer_timeout() -> void:
 
 
 func _on_player_pickup() -> void:
+	$AudioListener2D.make_current()	
+	$AudioListener2D.position = Vector2(240, 360)
+	$CoinSound.position = $Player.position
+	$CoinSound.play()
 	score += 1
 	$HUD.update_score(score)
 
